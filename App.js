@@ -4,13 +4,16 @@ import { View, StyleSheet, Dimensions, Text, ScrollView, ActivityIndicator } fro
 import * as Location from 'expo-location';
 import { Fontisto } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
+import styled from 'styled-components/native';
+import * as Font from 'expo-font';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 export default function App() {
-  const [city, setCity] = useState('Loading...');
+  const [city, setCity] = useState('로딩중...');
   const [days, setDays] = useState([]);
   const [permission, setPermission] = useState(true);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
   const icons = {
     Clouds: 'cloudy',
@@ -53,30 +56,42 @@ export default function App() {
     return `${year}년 ${month}월 ${days}일`;
   };
 
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      bmjua: require('./assets/fonts/BMJUA.ttf'),
+    });
+    setFontsLoaded(true);
+  };
+
   useEffect(() => {
+    loadFonts();
     getWeather();
   }, []);
+
+  if(!fontsLoaded){
+    return null;
+  }
 
   return (
     <LinearGradient colors={['#a6c0fe', '#f68084']} style={styles.container}>
       <View style={styles.city}>
-        <Text style={styles.cityName}>{city}</Text>
+        <StyledText style={styles.cityName}>{city}</StyledText>
       </View>
       <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false} style={styles.weather}>
         {days.length === 0 ? (
           <View style={{ ...styles.day, alignItems: 'center' }}>
-            <ActivityIndicator color='#161A41' size='large' />
+            <ActivityIndicator color='white' size='large' />
           </View>
         ) : (
           days.map((day, idx) => (
             <View key={idx} style={styles.day}>
-              <Text style={styles.date}>{splitDate(day.dt_txt.split(' ')[0])}</Text>
+              <StyledText style={styles.date}>{splitDate(day.dt_txt.split(' ')[0])}</StyledText>
               <View style={styles.temp_icon}>
-                <Text style={styles.temp}>{parseFloat(day.main.temp).toFixed(1)}</Text>
-                <Fontisto name={icons[day.weather[0].main]} size={60} color='#161A41' />
+                <StyledText style={styles.temp}>{parseFloat(day.main.temp).toFixed(1)}</StyledText>
+                <Fontisto style={{ marginRight: 20 }} name={icons[day.weather[0].main]} size={70} color='white' />
               </View>
-              <Text style={styles.main}>{day.weather[0].main}</Text>
-              <Text style={styles.description}>{day.weather[0].description}</Text>
+              <StyledText style={styles.main}>{day.weather[0].main}</StyledText>
+              <StyledText style={styles.description}>{day.weather[0].description}</StyledText>
             </View>
           ))
         )}
@@ -84,6 +99,11 @@ export default function App() {
     </LinearGradient>
   );
 }
+
+const StyledText = styled.Text`
+  font-family: 'bmjua';
+  color: white;
+`;
 
 const styles = StyleSheet.create({
   container: {
@@ -102,8 +122,7 @@ const styles = StyleSheet.create({
   },
 
   cityName: {
-    fontSize: 68,
-    fontWeight: '500',
+    fontSize: 60,
   },
 
   weather: {},
@@ -117,7 +136,8 @@ const styles = StyleSheet.create({
   temp: {
     marginTop: 30,
     fontSize: 120,
-    fontWeight: '500',
+    fontWeight: '400',
+    marginBottom: 20,
   },
 
   main: {
