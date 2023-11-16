@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { View, StyleSheet, Dimensions, Text, ScrollView, ActivityIndicator } from 'react-native';
 import * as Location from 'expo-location';
 import { Fontisto } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -46,26 +47,25 @@ export default function App() {
     );
   };
 
-
   const splitDate = (date) => {
     const [year, month, days] = date.split('-');
 
     return `${year}년 ${month}월 ${days}일`;
-  }
+  };
 
   useEffect(() => {
     getWeather();
   }, []);
 
   return (
-    <View style={styles.container}>
+    <LinearGradient colors={['#a6c0fe', '#f68084']} style={styles.container}>
       <View style={styles.city}>
         <Text style={styles.cityName}>{city}</Text>
       </View>
       <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false} style={styles.weather}>
         {days.length === 0 ? (
           <View style={{ ...styles.day, alignItems: 'center' }}>
-            <ActivityIndicator color='black' size='large' />
+            <ActivityIndicator color='#161A41' size='large' />
           </View>
         ) : (
           days.map((day, idx) => (
@@ -73,7 +73,7 @@ export default function App() {
               <Text style={styles.date}>{splitDate(day.dt_txt.split(' ')[0])}</Text>
               <View style={styles.temp_icon}>
                 <Text style={styles.temp}>{parseFloat(day.main.temp).toFixed(1)}</Text>
-                <Fontisto name={icons[day.weather[0].main]} size={60} color='black' />
+                <Fontisto name={icons[day.weather[0].main]} size={60} color='#161A41' />
               </View>
               <Text style={styles.main}>{day.weather[0].main}</Text>
               <Text style={styles.description}>{day.weather[0].description}</Text>
@@ -81,14 +81,13 @@ export default function App() {
           ))
         )}
       </ScrollView>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffd400',
   },
 
   date: {
