@@ -46,6 +46,13 @@ export default function App() {
     );
   };
 
+
+  const splitDate = (date) => {
+    const [year, month, days] = date.split('-');
+
+    return `${year}년 ${month}월 ${days}일`;
+  }
+
   useEffect(() => {
     getWeather();
   }, []);
@@ -63,6 +70,7 @@ export default function App() {
         ) : (
           days.map((day, idx) => (
             <View key={idx} style={styles.day}>
+              <Text style={styles.date}>{splitDate(day.dt_txt.split(' ')[0])}</Text>
               <View style={styles.temp_icon}>
                 <Text style={styles.temp}>{parseFloat(day.main.temp).toFixed(1)}</Text>
                 <Fontisto name={icons[day.weather[0].main]} size={60} color='black' />
@@ -81,6 +89,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#ffd400',
+  },
+
+  date: {
+    fontSize: 20,
+    fontWeight: '700',
   },
 
   city: {
