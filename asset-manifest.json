@@ -1,8 +1,9 @@
 {
   "files": {
-    "main.js": "/react-native-basic/static/js/main.05050c53.js",
-    "static/js/743.5d65cf47.js": "/react-native-basic/static/js/743.5d65cf47.js",
+    "main.js": "/react-native-basic/static/js/main.9172fb77.js",
+    "static/js/719.327c405f.js": "/react-native-basic/static/js/719.327c405f.js",
     "static/media/Fontisto.ttf": "/react-native-basic/static/media/Fontisto.c0edd68811e0237502fe.ttf",
+    "static/media/BMHANNA_11yrs.otf": "/react-native-basic/static/media/BMHANNA_11yrs.23af5c356447b67445d9.otf",
     "favicon.ico": "/react-native-basic/favicon.ico",
     "index.html": "/react-native-basic/index.html",
     "favicon-32.png": "/react-native-basic/favicon-32.png",
@@ -10,11 +11,11 @@
     "static/media/index.cjs": "/react-native-basic/static/media/index.cd351d7c31d0d3fccf96.cjs",
     "manifest.json": "/react-native-basic/manifest.json",
     "serve.json": "/react-native-basic/serve.json",
-    "main.05050c53.js.map": "/react-native-basic/static/js/main.05050c53.js.map",
-    "743.5d65cf47.js.map": "/react-native-basic/static/js/743.5d65cf47.js.map"
+    "main.9172fb77.js.map": "/react-native-basic/static/js/main.9172fb77.js.map",
+    "719.327c405f.js.map": "/react-native-basic/static/js/719.327c405f.js.map"
   },
   "entrypoints": [
-    "static/js/743.5d65cf47.js",
-    "static/js/main.05050c53.js"
+    "static/js/719.327c405f.js",
+    "static/js/main.9172fb77.js"
   ]
 }
