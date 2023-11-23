@@ -58,7 +58,7 @@ export default function App() {
 
   const loadFonts = async () => {
     await Font.loadAsync({
-      bmjua: require('./assets/fonts/BMJUA.ttf'),
+      bmjua: require('./assets/fonts/BMHANNA_11yrs.otf'),
     });
     setFontsLoaded(true);
   };
